@@ -24,7 +24,6 @@ Smart Notes AI is a web application that leverages AI to transform your class no
 - **Backend:** Firebase (Authentication, Firestore Database)
 - **AI:** Maverick API (via OpenRouter) - specifically `meta-llama/llama-3.1-8b-instruct:free`
 - **Libraries:**
-    - D3.js (for potential mind map visualization)
     - html2pdf.js (for PDF export)
 
 ## Project Structure

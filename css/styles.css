@@ -1,0 +1,82 @@
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* PDF Export Specific Styles */
+
+/* Global styles for html2pdf.js */
+.pdf-content-section {
+    page-break-inside: avoid; /* Try to keep the whole section together if it fits */
+    margin-bottom: 10mm; /* Consistent spacing between sections */
+    line-height: 1.5; /* Improved readability */
+}
+
+.pdf-no-break {
+    page-break-inside: avoid !important; /* For elements that absolutely should not break */
+}
+
+.pdf-page-break-before {
+    page-break-before: always !important;
+}
+
+/* Styles for @media print (and by extension, html2pdf.js) */
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 11pt; /* Slightly smaller base font for more content per page */
+        line-height: 1.4; /* Adjust line height */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid !important; /* Don't break right after a heading */
+        page-break-inside: avoid !important; /* Don't break a heading itself */
+        orphans: 3;
+        widows: 3;
+        margin-top: 1.2em; /* Relative spacing */
+        margin-bottom: 0.6em;
+    }
+
+    p, .prose p { /* Target paragraphs specifically, including those within Tailwind prose */
+        orphans: 3;
+        widows: 3;
+        margin-bottom: 0.5em; /* Consistent paragraph spacing */
+        page-break-inside: auto; /* Allow paragraphs to break if they are long */
+        word-wrap: break-word; /* Ensure long words break to prevent overflow */
+        overflow-wrap: break-word;
+    }
+
+    ul, ol {
+        page-break-inside: auto; /* Allow lists to break */
+        margin-bottom: 0.5em;
+        padding-left: 20px; /* Ensure consistent list indentation */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    li {
+        page-break-inside: auto; /* Allow long list items to break */
+        margin-bottom: 0.2em; /* Spacing for list items */
+        orphans: 2; 
+        widows: 2;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .pdf-content-section {
+        margin-bottom: 10mm; /* Reiterate for print */
+        page-break-inside: avoid; /* Attempt to keep sections from breaking, but allow if too large */
+    }
+
+    .pdf-no-break {
+        page-break-inside: avoid !important;
+    }
+
+    img, figure, svg { /* Images and figures should not break */
+        page-break-inside: avoid !important;
+        max-width: 100% !important; /* Ensure they fit */
+        display: block; /* Prevent inline flow issues */
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+}

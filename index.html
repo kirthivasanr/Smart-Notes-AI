@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Notes AI - Login</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Add this line -->
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- Custom JS -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+</head>
+<body class="min-h-screen bg-slate-100 flex flex-col items-center justify-center p-6">
+    <div class="w-full max-w-lg mx-auto"> <!-- Changed max-w-md to max-w-lg -->
+        <!-- Logo, Title, and Subtitle Section -->
+        <div class="text-center mb-12"> <!-- Increased mb-10 to mb-12 -->
+            <div class="inline-block bg-purple-100 rounded-full p-5 mb-8 shadow-sm"> <!-- Increased p-4 to p-5, mb-6 to mb-8 -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <!-- Increased h-10 w-10 to h-12 w-12 -->
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold text-gray-800 mb-5">Smart Notes AI</h1> <!-- Changed text-4xl to text-5xl, mb-4 to mb-5 -->
+            <p class="text-gray-600 text-lg leading-relaxed max-w-sm mx-auto">Transform your notes into concise summaries, insightful questions, and dynamic learning resources with the power of AI.</p> <!-- Changed text-base to text-lg, max-w-xs to max-w-sm -->
+        </div>
+
+        <!-- Sign-in Button Section -->
+        <div class="bg-transparent rounded-xl p-0 mb-8 flex justify-center"> <!-- Added flex justify-center -->
+            <button id="googleSignIn" class="flex items-center justify-center gap-2 bg-purple-600 rounded-lg px-10 py-3 text-white font-semibold hover:bg-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-md"> <!-- Removed w-full, changed px-4 to px-10 -->
+                <!-- Google Icon (simplified or from an SVG library if available, current one is multi-color) -->
+                <!-- Using a simple white G for placeholder, replace with actual Google icon SVG if needed -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12.27V14.2H18.1C17.86 15.51 17.07 16.63 15.89 17.38V19.89H19.48C21.43 18.07 22.56 15.41 22.56 12.25Z"/>
+                    <path d="M12.27 23C15.12 23 17.53 22.05 19.48 20.39L15.89 17.88C14.96 18.53 13.72 18.92 12.27 18.92C9.86 18.92 7.81 17.39 7 15.08H3.31V17.58C5.25 20.93 8.53 23 12.27 23Z"/>
+                    <path d="M7 15.08C6.76 14.39 6.64 13.65 6.64 12.92C6.64 12.18 6.76 11.44 7 10.75V8.25H3.31C2.43 9.99 1.93 11.97 1.93 13.92C1.93 15.87 2.43 17.85 3.31 19.59L7 15.08Z"/>
+                    <path d="M12.27 6.92C13.79 6.92 15.01 7.42 15.94 8.31L19.54 4.72C17.53 2.86 15.12 1.83 12.27 1.83C8.53 1.83 5.25 4.07 3.31 7.42L7 9.92C7.81 7.61 9.86 6.92 12.27 6.92Z"/>
+                </svg>
+                Sign in with Google
+            </button>
+            <div id="authError" class="text-red-600 text-center hidden mt-4 text-sm"></div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="text-center text-xs text-gray-500 space-y-2"> <!-- Increased space-y -->
+            <p>By signing in, you agree to our <a href="#" class="text-purple-600 hover:text-purple-700 underline">Terms of Service</a> & <a href="#" class="text-purple-600 hover:text-purple-700 underline">Privacy Policy</a>.</p>
+            <p>© 2025 Smart Notes AI. Simplified learning built by Kirthivasan M R.<br>All rights reserved.</p> <!-- Added "All rights reserved." -->
+        </div>
+    </div>
+</body>
+</html>

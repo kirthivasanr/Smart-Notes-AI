@@ -1,0 +1,8 @@
+{
+  "name": "smart-notes-ai",
+  "version": "1.0.0",
+  "description": "AI-powered note processing application",
+  "dependencies": {
+    "firebase": "^10.7.1"
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Notes AI - Dashboard</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Firebase SDK -->
+    <!-- Note: Using version 10.7.1 consistently might be better if index.html uses it -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- Custom JS -->
+    <!-- Load Firebase config FIRST -->
+    <script src="js/firebase-config.js"></script> 
+    <!-- Load other scripts AFTER config -->
+    <script src="js/auth.js"></script> 
+    <script src="js/firestore.js"></script> 
+    <script src="js/dashboard.js"></script> 
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-600">Smart Notes AI</h1>
+            
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <img id="userProfileImage" src="https://via.placeholder.com/32" alt="Profile" class="w-8 h-8 rounded-full">
+                    <div>
+                        <p id="userName" class="text-sm font-medium text-gray-700">User</p>
+                        <p id="userEmail" class="text-xs text-gray-500">user@example.com</p>
+                    </div>
+                </div>
+                <button id="logoutButton" class="text-sm font-medium text-red-600 bg-red-100 hover:bg-red-200 px-4 py-2 rounded-md transition-colors">Logout</button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Your Notes</h2>
+            <a href="note-input.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md">Create New Note</a>
+        </div>
+        
+        <div id="notesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Notes will be loaded here dynamically -->
+        </div>
+    </main>
+</body>
+</html>

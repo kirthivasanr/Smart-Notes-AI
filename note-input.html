@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Notes AI - Create Note</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Add this line -->
+    <!-- Firebase SDK (Consider using 10.7.1 for consistency) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>    <!-- Custom JS - Order is crucial for proper loading -->
+    <script src="js/firebase-config.js"></script> <!-- Load Firebase config first -->
+    <script src="js/maverick.js" defer></script>       <!-- Load Maverick functions next -->
+    <script src="js/auth.js" defer></script>           <!-- Load Auth -->
+    <script src="js/firestore.js" defer></script>      <!-- Load Firestore functions -->
+    <script src="js/app.js" defer></script>            <!-- Load App logic last -->
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col items-center justify-start pt-8 pb-12 px-4 sm:px-6 lg:px-8">
+    <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex justify-between items-center mb-10">
+        <h1 class="text-3xl font-bold text-indigo-600">Smart Notes AI</h1>
+        <a href="dashboard.html" class="text-sm font-semibold text-indigo-700 bg-indigo-100 hover:bg-indigo-200 px-5 py-2.5 rounded-lg transition-colors">
+            Dashboard
+        </a>
+    </header>
+    <div class="max-w-2xl w-full space-y-8 p-10 bg-white rounded-xl shadow-lg">
+        <form id="noteForm" class="space-y-8">
+            <div>
+                <label for="noteTitle" class="block text-sm font-semibold text-gray-700 mb-1">Note Title</label>
+                <input type="text" id="noteTitle" name="noteTitle" required placeholder="Enter note title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+            </div>
+            
+            <div>
+                <label for="noteSubject" class="block text-sm font-semibold text-gray-700 mb-1">Subject (Optional)</label>
+                <input type="text" id="noteSubject" name="noteSubject" placeholder="Enter subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+            </div>
+            
+            <div>
+                <label for="noteContent" class="block text-sm font-semibold text-gray-700 mb-1">Note Content</label>
+                <textarea id="noteContent" name="noteContent" rows="8" required placeholder="Paste or type your notes here..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"></textarea>
+            </div>
+            
+            <div class="flex items-center justify-end space-x-3 pt-4">
+                <button type="button" onclick="window.location.href='dashboard.html'" class="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    Cancel
+                </button>
+                <button type="submit" id="processWithAI" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    Process with AI
+                </button>
+            </div>
+        </form>
+        
+        <div id="processingIndicator" class="mt-6 text-center text-gray-600 hidden">
+            <div class="flex flex-col items-center justify-center">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p id="processingText" class="mt-2 text-sm">Processing your note... Please wait.</p>
+            </div>
+        </div>
+        <div id="errorMessage" class="mt-6 text-center text-red-600 hidden">
+            <!-- Error messages will appear here -->
+        </div>
+    </div>
+</body>
+</html>

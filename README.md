@@ -123,4 +123,4 @@ The [`processNoteWithMaverick`](js/maverick.js) function in [`js/maverick.js`](j
 
 ---
 
-This README provides a comprehensive overview of the Smart Notes AI application.
+This README provides a comprehensive overview of the Smart Notes AI application.Built by Kirthivasan M R

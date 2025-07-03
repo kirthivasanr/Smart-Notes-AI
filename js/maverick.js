@@ -1,5 +1,5 @@
 // Maverick API configuration
-const MAVERICK_API_KEY = 'Your Maverick Key'; // Your OpenRouter API key
+const MAVERICK_API_KEY = 'YOUR_MAVERICK_API_KEY_HERE'; // Add your OpenRouter API key here
 const MAVERICK_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // Process notes with Maverick API

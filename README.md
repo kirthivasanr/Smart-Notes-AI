@@ -1,6 +1,6 @@
 # Smart Notes AI
 
-Smart Notes AI is a web application that uses AI to help you process and understand your notes. It can generate summaries, important questions, multiple-choice questions, and relevant YouTube keywords from your notes.
+Smart Notes AI is a web application that uses AI to help you process and understand your notes. It can generate summaries, important questions, multiple-choice questions, and relevant YouTube keywords from your notes and can download it as PDF format.
 
 ## Setup
 

@@ -1,11 +1,11 @@
 // Initialize Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyA9ue0HgkzCjVy-Bteb3Rx6kHwL31JE71c",
-    authDomain: "smart-notes-ai-a8127.firebaseapp.com",
-    projectId: "smart-notes-ai-a8127",
-    storageBucket: "smart-notes-ai-a8127.firebasestorage.app",
-    messagingSenderId: "815326262098",
-    appId: "1:815326262098:web:74ab9fb3a06f03179b008b"
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
 };
 
 // Initialize Firebase only if it hasn't been initialized yet

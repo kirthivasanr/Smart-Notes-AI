@@ -137,24 +137,19 @@ function setupNoteInputPage() {
                 if (!user) {
                     throw new Error('You must be logged in to save notes');
                 }
-                // **** ADD THIS LOG ****
-                console.log('User UID before calling saveNote:', user.uid, '(Type:', typeof user.uid, ')');
-                // *********************
+
 
                 // Check if processNoteWithMaverick is defined BEFORE calling it
                 if (typeof processNoteWithMaverick !== 'function') {
                      console.error('processNoteWithMaverick function is not available!');
                      throw new Error('AI processing function is not loaded correctly.');
                 }
-                console.log("Calling processNoteWithMaverick..."); // Debug log
+                console.log("Calling processNoteWithMaverick...");
 
                 // Process the note with Maverick API
-                // Pass title as well, as defined in gemini.js
+                
                 const processedData = await processNoteWithMaverick(title, content, subject);
-                console.log("Gemini processing complete, data:", processedData); // Log the processed data
-                // **** ADD THIS LOG ****
-                console.log('Detailed processedData in app.js before saving:', JSON.stringify(processedData, null, 2));
-                // *********************
+                console.log("Processing complete");
 
                 // Save the note to Firestore
                 // Ensure processedData is included here
@@ -171,13 +166,11 @@ function setupNoteInputPage() {
                     console.error('saveNote function is not available!');
                     throw new Error('Firestore save function is not loaded correctly.');
                 }
-                console.log("Calling saveNote..."); // Debug log
-                // Log the actual data being passed to saveNote
-                console.log("Data being sent to Firestore:", JSON.stringify(noteDataToSave, null, 2));
+                console.log("Calling saveNote...");
 
                 // Pass the complete noteDataToSave object to saveNote
                 const noteId = await saveNote(user.uid, noteDataToSave); // *** USE THE FULL OBJECT ***
-                console.log("Note saved with ID:", noteId); // Debug log
+                console.log("Note saved with ID:", noteId);
 
                 // Instead of redirecting, call a function to display results directly
                 if (noteId && processedData) {
@@ -239,14 +232,7 @@ function setupNoteViewerPage() {
                 }
 
                 // Pass both user.uid and noteId to getNoteById
-                console.log(`Calling getNoteById with userId: ${user.uid}, noteId: ${noteId}`);
                 const note = await getNoteById(user.uid, noteId);
-
-                // **** ADD THIS LOG ****
-                console.log('Note object received in app.js:', note);
-                // **** ADD THIS LOG ****
-                console.log('Detailed note object in app.js after fetching:', JSON.stringify(note, null, 2));
-                // *********************
 
                 if (!note) {
                     // This error might be triggered if getNoteById returns null
@@ -258,9 +244,6 @@ function setupNoteViewerPage() {
                      console.error('displayNote function is not available!');
                      throw new Error('Display function is not loaded correctly.');
                 }
-                // **** ADD THIS LOG ****
-                console.log('Calling displayNote with note:', note);
-                // *********************
                 displayNote(note); // Make sure this function exists and works
                 
                 // Setup button event listeners after note is loaded
@@ -299,8 +282,6 @@ function setupNoteViewerButtons(note) {
 
 // Display note data in the viewer
 function displayNote(note) {
-    console.log('Displaying note:', note); // Debug log
-    
     // Set the note title
     document.getElementById('noteTitle').textContent = note.title || 'Untitled Note';
     

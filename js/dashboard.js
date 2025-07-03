@@ -11,7 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update user profile information
             if (userNameElement) userNameElement.textContent = user.displayName || 'User';
             if (userEmailElement) userEmailElement.textContent = user.email || '';
-            if (userProfileImage && user.photoURL) userProfileImage.src = user.photoURL;
+            if (userProfileImage) {
+                console.log('Dashboard - User photoURL:', user.photoURL);
+                if (user.photoURL) {
+                    userProfileImage.src = user.photoURL;
+                    userProfileImage.crossOrigin = "anonymous";
+                    userProfileImage.onerror = function() {
+                        console.log('Dashboard - Failed to load profile photo, using default');
+                        const initial = user.displayName ? user.displayName.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U');
+                        this.src = "https://via.placeholder.com/32/6366f1/white?text=" + initial;
+                    };
+                    userProfileImage.onload = function() {
+                        console.log('Dashboard - Profile photo loaded successfully');
+                    };
+                } else {
+                    console.log('Dashboard - No photoURL available, using placeholder');
+                    // Create a placeholder with user's initial
+                    const initial = user.displayName ? user.displayName.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U');
+                    userProfileImage.src = "https://via.placeholder.com/32/6366f1/white?text=" + initial;
+                }
+            }
             
             // Load user's notes
             loadNotes(user.uid);

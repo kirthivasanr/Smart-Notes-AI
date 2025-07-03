@@ -56,10 +56,28 @@ function initializeAuth() {
                 userEmailElement.textContent = user.email;
             }
             if (userProfileImageElement) {
+                console.log('User displayName:', user.displayName);
+                console.log('User photoURL:', user.photoURL);
+                console.log('User email:', user.email);
+                
                 if (user.photoURL) {
+                    console.log('Setting profile image to:', user.photoURL);
                     userProfileImageElement.src = user.photoURL;
+                    userProfileImageElement.crossOrigin = "anonymous";
+                    userProfileImageElement.onerror = function() {
+                        console.log('Failed to load profile photo, using default');
+                        const initial = user.displayName ? user.displayName.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U');
+                        this.src = "https://via.placeholder.com/32/6366f1/white?text=" + initial;
+                    };
+                    userProfileImageElement.onload = function() {
+                        console.log('Profile photo loaded successfully');
+                    };
+                } else {
+                    console.log('No photoURL available, using placeholder');
+                    // Create a placeholder with user's initial
+                    const initial = user.displayName ? user.displayName.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U');
+                    userProfileImageElement.src = "https://via.placeholder.com/32/6366f1/white?text=" + initial;
                 }
-                // If no photoURL, it will keep the default src from the HTML
             }
             
             // Redirect to dashboard if on login page
@@ -139,15 +157,12 @@ function initializeAuth() {
 // Enhanced Google Sign-In function
 async function signInWithGoogle() {
     try {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('email');
-        provider.addScope('profile');
-        
-        // Use popup for sign-in
-        const result = await firebase.auth().signInWithPopup(provider);
+        // Use the global provider from firebase-config.js
+        const result = await firebase.auth().signInWithPopup(window.googleProvider);
         const user = result.user;
         
         console.log('User signed in successfully:', user.displayName || user.email);
+        console.log('Full user object:', user);
         
         // Clear any previous error messages
         hideAuthError();
@@ -180,6 +195,31 @@ async function signInWithGoogle() {
         showAuthError(errorMessage);
     }
 }
+
+// Debug function to check user profile data
+function debugUserProfile() {
+    const user = firebase.auth().currentUser;
+    if (user) {
+        console.log('=== USER PROFILE DEBUG ===');
+        console.log('Display Name:', user.displayName);
+        console.log('Email:', user.email);
+        console.log('Photo URL:', user.photoURL);
+        console.log('Provider Data:', user.providerData);
+        console.log('Metadata:', user.metadata);
+        console.log('=========================');
+        
+        // Try to reload user data
+        user.reload().then(() => {
+            console.log('User data reloaded');
+            console.log('Updated Photo URL:', user.photoURL);
+        });
+    } else {
+        console.log('No user signed in');
+    }
+}
+
+// Make it available globally for debugging
+window.debugUserProfile = debugUserProfile;
 
 // Utility functions for error handling
 function showAuthError(message) {
